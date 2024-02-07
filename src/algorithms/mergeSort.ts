@@ -2,6 +2,7 @@ const mergeSort = async (
   data: number[],
   setData: (data: number[]) => void,
   setSortingIndex: (index: number | null) => void,
+  speedRef: React.MutableRefObject<number>,
   low: number = 0,
   high: number = data.length - 1
 ) => {
@@ -9,10 +10,10 @@ const mergeSort = async (
     const mid = Math.floor((low + high) / 2);
 
     await Promise.all([
-      mergeSort(data, setData, setSortingIndex, low, mid),
-      mergeSort(data, setData, setSortingIndex, mid + 1, high),
+      mergeSort(data, setData, setSortingIndex, speedRef, low, mid),
+      mergeSort(data, setData, setSortingIndex, speedRef, mid + 1, high),
     ]);
-    await merge(data, setData, setSortingIndex, low, mid, high);
+    await merge(data, setData, setSortingIndex, low, mid, high, speedRef);
   }
 };
 
@@ -22,7 +23,8 @@ const merge = async (
   setSortingIndex: (index: number | null) => void,
   low: number,
   mid: number,
-  high: number
+  high: number,
+  speedRef: React.MutableRefObject<number>
 ) => {
   const n1 = mid - low + 1;
   const n2 = high - mid;
@@ -42,7 +44,8 @@ const merge = async (
   let k = low;
 
   while (i < n1 && j < n2) {
-    await new Promise((resolve) => setTimeout(resolve, 5));
+    const speed = speedRef.current;
+    await new Promise((resolve) => setTimeout(resolve, speed));
     if (leftArray[i] <= rightArray[j]) {
       setSortingIndex(k);
       data[k] = leftArray[i];
@@ -57,7 +60,8 @@ const merge = async (
   }
 
   while (i < n1) {
-    await new Promise((resolve) => setTimeout(resolve, 50));
+    const speed = speedRef.current;
+    await new Promise((resolve) => setTimeout(resolve, speed));
     setSortingIndex(k);
     data[k] = leftArray[i];
     setData([...data]);
@@ -66,7 +70,8 @@ const merge = async (
   }
 
   while (j < n2) {
-    await new Promise((resolve) => setTimeout(resolve, 50));
+    const speed = speedRef.current;
+    await new Promise((resolve) => setTimeout(resolve, speed));
     setSortingIndex(k);
     data[k] = rightArray[j];
     setData([...data]);

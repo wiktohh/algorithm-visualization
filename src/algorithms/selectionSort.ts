@@ -1,7 +1,8 @@
 const selectionSort = async (
   data: number[],
   setData: (data: number[]) => void,
-  setSortingIndex: (index: number | null) => void
+  setSortingIndex: (index: number | null) => void,
+  speedRef: React.MutableRefObject<number>
 ) => {
   const n = data.length;
 
@@ -9,7 +10,8 @@ const selectionSort = async (
     let minIndex = i;
 
     for (let j = i + 1; j < n; j++) {
-      await new Promise((resolve) => setTimeout(resolve, 5));
+      const speed = speedRef.current;
+      await new Promise((resolve) => setTimeout(resolve, speed));
       if (data[j] < data[minIndex]) {
         minIndex = j;
       }

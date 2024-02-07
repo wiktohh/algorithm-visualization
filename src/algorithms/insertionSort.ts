@@ -1,7 +1,8 @@
 const insertionSort = async (
   data: number[],
   setData: (data: number[]) => void,
-  setSortingIndex: (index: number | null) => void
+  setSortingIndex: (index: number | null) => void,
+  speedRef: React.MutableRefObject<number>
 ) => {
   const updatedBars = [...data];
   for (let i = 1; i < updatedBars.length; i++) {
@@ -11,12 +12,14 @@ const insertionSort = async (
       setSortingIndex(j);
       updatedBars[j + 1] = updatedBars[j];
       setData([...updatedBars]);
-      await new Promise((resolve) => setTimeout(resolve, 5));
+      const speed = speedRef.current;
+      await new Promise((resolve) => setTimeout(resolve, speed));
       j = j - 1;
     }
     updatedBars[j + 1] = key;
     setData([...updatedBars]);
-    await new Promise((resolve) => setTimeout(resolve, 5));
+    const speed = speedRef.current;
+    await new Promise((resolve) => setTimeout(resolve, speed));
   }
 };
 

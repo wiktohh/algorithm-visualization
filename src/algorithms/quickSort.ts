@@ -2,15 +2,23 @@ const quickSort = async (
   data: number[],
   setData: (data: number[]) => void,
   setSortingIndex: (index: number | null) => void,
+  speedRef: React.MutableRefObject<number>,
   low: number = 0,
   high: number = data.length - 1
 ) => {
   if (low < high) {
-    const pi = await partition(data, setData, setSortingIndex, low, high);
+    const pi = await partition(
+      data,
+      setData,
+      setSortingIndex,
+      low,
+      high,
+      speedRef
+    );
 
     await Promise.all([
-      quickSort(data, setData, setSortingIndex, low, pi - 1),
-      quickSort(data, setData, setSortingIndex, pi + 1, high),
+      quickSort(data, setData, setSortingIndex, speedRef, low, pi - 1),
+      quickSort(data, setData, setSortingIndex, speedRef, pi + 1, high),
     ]);
   }
 };
@@ -20,13 +28,15 @@ const partition = async (
   setData: (data: number[]) => void,
   setSortingIndex: (index: number | null) => void,
   low: number,
-  high: number
+  high: number,
+  speedRef: React.MutableRefObject<number>,
 ) => {
   const pivot = data[high];
   let i = low - 1;
 
   for (let j = low; j < high; j++) {
-    await new Promise((resolve) => setTimeout(resolve, 5));
+    const speed = speedRef.current;
+    await new Promise((resolve) => setTimeout(resolve, speed));
     if (data[j] < pivot) {
       i++;
       setSortingIndex(j);
