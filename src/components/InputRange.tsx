@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 interface InputRangeProps {
   label: string;
@@ -7,6 +7,7 @@ interface InputRangeProps {
   values: number[];
   min: number;
   max: number;
+  defaultValue: number;
 }
 
 const InputRange = ({
@@ -16,12 +17,10 @@ const InputRange = ({
   values,
   min,
   max,
+  defaultValue,
 }: InputRangeProps) => {
-  const [value, setValue] = useState(50); // Dodaliśmy stan do przechowywania aktualnej wartości
-
   const handleRangeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = parseInt(event.target.value, 10);
-    setValue(newValue);
+    const newValue = parseInt(event.target.value);
     onChange(newValue);
   };
 
@@ -34,7 +33,7 @@ const InputRange = ({
           min={min}
           max={max}
           step={step}
-          value={value}
+          defaultValue={defaultValue}
           className="w-full"
           id="range"
           onChange={handleRangeChange}

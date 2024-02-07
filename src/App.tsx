@@ -14,7 +14,7 @@ function App() {
   const [sortingIndex, setSortingIndex] = useState<number | null>(null);
   const [algorithm, setAlgorithm] = useState("");
   const speedRef = useRef(50);
-  const [barCount, setBarCount] = useState(50);
+  const [barCount, setBarCount] = useState(90);
 
   const runAlgorithm = async () => {
     switch (algorithm) {
@@ -86,6 +86,7 @@ function App() {
           values={[0, 25, 50, 75, 100]}
           min={0}
           max={100}
+          defaultValue={speedRef.current}
         />
         <InputRange
           label="Bar Count"
@@ -94,6 +95,7 @@ function App() {
           values={[10, 50, 90, 130, 170]}
           min={10}
           max={170}
+          defaultValue={barCount}
         />
       </div>
       <div className="flex justify-center items-end h-1/2 space-x-[1px]">
