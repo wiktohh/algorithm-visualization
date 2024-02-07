@@ -57,7 +57,7 @@ const merge = async (
   }
 
   while (i < n1) {
-    await new Promise((resolve) => setTimeout(resolve, 5));
+    await new Promise((resolve) => setTimeout(resolve, 50));
     setSortingIndex(k);
     data[k] = leftArray[i];
     setData([...data]);
@@ -66,7 +66,7 @@ const merge = async (
   }
 
   while (j < n2) {
-    await new Promise((resolve) => setTimeout(resolve, 5));
+    await new Promise((resolve) => setTimeout(resolve, 50));
     setSortingIndex(k);
     data[k] = rightArray[j];
     setData([...data]);

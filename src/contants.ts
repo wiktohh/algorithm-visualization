@@ -3,6 +3,7 @@ export const enum SORT {
   INSERTION = "insertion",
   QUICK = "quick",
   MERGE = "merge",
+  SELECTION = "selection",
 }
 
 export const options = [
@@ -10,4 +11,5 @@ export const options = [
   { label: "Insertion Sort", value: SORT.INSERTION },
   { label: "Quick Sort", value: SORT.QUICK },
   { label: "Merge Sort", value: SORT.MERGE },
+  { label: "Selection Sort", value: SORT.SELECTION },
 ];

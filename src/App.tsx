@@ -6,6 +6,7 @@ import insertionSort from "./algorithms/insertionSort";
 import quickSort from "./algorithms/quickSort";
 import { options, SORT } from "./contants";
 import mergeSort from "./algorithms/mergeSort";
+import selectionSort from "./algorithms/selectionSort";
 
 function App() {
   const [data, setData] = useState<number[]>([]);
@@ -25,6 +26,9 @@ function App() {
         break;
       case SORT.MERGE:
         await mergeSort(data, setData, setSortingIndex);
+        break;
+      case SORT.SELECTION:
+        await selectionSort(data, setData, setSortingIndex);
         break;
       default:
         break;
