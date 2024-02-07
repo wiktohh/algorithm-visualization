@@ -5,6 +5,7 @@ import bubbleSort from "./algorithms/bubbleSort";
 import insertionSort from "./algorithms/insertionSort";
 import quickSort from "./algorithms/quickSort";
 import { options, SORT } from "./contants";
+import mergeSort from "./algorithms/mergeSort";
 
 function App() {
   const [data, setData] = useState<number[]>([]);
@@ -20,7 +21,10 @@ function App() {
         await insertionSort(data, setData, setSortingIndex);
         break;
       case SORT.QUICK:
-        await quickSort(data, setData, setSortingIndex, 0, data.length - 1);
+        await quickSort(data, setData, setSortingIndex);
+        break;
+      case SORT.MERGE:
+        await mergeSort(data, setData, setSortingIndex);
         break;
       default:
         break;
