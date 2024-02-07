@@ -5,7 +5,7 @@ const insertionSort = async (
 ) => {
   const updatedBars = [...data];
   for (let i = 1; i < updatedBars.length; i++) {
-    let key = updatedBars[i];
+    const key = updatedBars[i];
     let j = i - 1;
     while (j >= 0 && updatedBars[j] > key) {
       setSortingIndex(j);

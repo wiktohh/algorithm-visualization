@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import Select from "./components/Select";
 import bubbleSort from "./algorithms/bubbleSort";
 import insertionSort from "./algorithms/insertionSort";
+import quickSort from "./algorithms/quickSort";
 import { options, SORT } from "./contants";
 
 function App() {
@@ -17,6 +18,9 @@ function App() {
         break;
       case SORT.INSERTION:
         await insertionSort(data, setData, setSortingIndex);
+        break;
+      case SORT.QUICK:
+        await quickSort(data, setData, setSortingIndex, 0, data.length - 1);
         break;
       default:
         break;
