@@ -78,7 +78,7 @@ function App() {
           options={options}
         />
       </div>
-      <div className="flex justify-center items-center space-x-4 my-4">
+      <div className="flex justify-center items-center space-x-24 my-4">
         <InputRange
           label="Speed (ms)"
           onChange={(val) => (speedRef.current = val)}

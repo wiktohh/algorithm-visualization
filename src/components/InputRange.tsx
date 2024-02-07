@@ -6,10 +6,17 @@ interface InputRangeProps {
   step: number;
   values: number[];
   min: number;
-  max: number
+  max: number;
 }
 
-const InputRange = ({ label, onChange, step, values, min, max }: InputRangeProps) => {
+const InputRange = ({
+  label,
+  onChange,
+  step,
+  values,
+  min,
+  max,
+}: InputRangeProps) => {
   const [value, setValue] = useState(50); // Dodaliśmy stan do przechowywania aktualnej wartości
 
   const handleRangeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,7 +26,7 @@ const InputRange = ({ label, onChange, step, values, min, max }: InputRangeProps
   };
 
   return (
-    <div>
+    <div className="w-1/6">
       <label htmlFor="range">{label}</label>
       <div>
         <input
@@ -27,14 +34,14 @@ const InputRange = ({ label, onChange, step, values, min, max }: InputRangeProps
           min={min}
           max={max}
           step={step}
-          value={value} // Ustawienie wartości z nowego stanu
-          className="slider"
+          value={value}
+          className="w-full"
           id="range"
           onChange={handleRangeChange}
         />
         <div className="flex justify-between text-center text-xs">
           {values?.map((val, index) => (
-            <span key={index} className="w-1/5">
+            <span key={index} className="w-1/8">
               {val}
             </span>
           ))}
