@@ -2,19 +2,34 @@ import { useEffect, useState } from "react";
 import Header from "./components/Header";
 import Select from "./components/Select";
 import bubbleSort from "./algorithms/bubbleSort";
-import { options } from "./contants";
+import insertionSort from "./algorithms/insertionSort";
+import { options, SORT } from "./contants";
 
 function App() {
   const [data, setData] = useState<number[]>([]);
   const [sortingIndex, setSortingIndex] = useState<number | null>(null);
   const [algorithm, setAlgorithm] = useState("");
 
+  const runAlgorithm = async () => {
+    switch (algorithm) {
+      case SORT.BUBBLE:
+        await bubbleSort(data, setData, setSortingIndex);
+        break;
+      case SORT.INSERTION:
+        await insertionSort(data, setData, setSortingIndex);
+        break;
+      default:
+        break;
+    }
+  };
+
   const generateData = () => {
     const newData = Array.from(
-      { length: 10 },
+      { length: 100 },
       () => Math.floor(Math.random() * 90) + 10
     );
     setData(newData);
+    setSortingIndex(null);
   };
 
   useEffect(() => {
@@ -22,10 +37,6 @@ function App() {
   }, []);
 
   const maxItem = Math.max(...data);
-
-  const bubbleSortHandler = async () => {
-    await bubbleSort(data, setData, setSortingIndex);
-  };
 
   return (
     <div className="h-screen w-screen">
@@ -39,7 +50,7 @@ function App() {
         </button>
         <button
           className="bg-blue-400 hover:bg-blue-500 px-4 py-2 rounded-md text-white font-bold text-lg"
-          onClick={bubbleSortHandler}
+          onClick={runAlgorithm}
         >
           Run Algorithm
         </button>
@@ -54,17 +65,15 @@ function App() {
         />
       </div>
 
-      <div className="flex justify-center items-end h-1/2 space-x-4">
+      <div className="flex justify-center items-end h-1/2 space-x-[1px]">
         {data.map((item, index) => (
           <div
             key={index}
             className={`${
               sortingIndex === index ? "bg-red-500" : "bg-blue-500"
-            } w-12`}
+            } w-[10px]`}
             style={{ height: `${(item / maxItem) * 100}%` }}
-          >
-            {item}
-          </div>
+          ></div>
         ))}
       </div>
     </div>
