@@ -37,7 +37,9 @@ const InputRange = ({
           max={max}
           step={step}
           defaultValue={defaultValue}
-          className="w-full cursor-grab"
+          className={`w-full ${
+            isSorting ? "cursor-not-allowed" : "cursor-grab"
+          }`}
           id="range"
           onChange={handleRangeChange}
         />
