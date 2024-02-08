@@ -14,7 +14,7 @@ import AlgorithmInfo from "./components/AlgorithmInfo";
 function App() {
   const [data, setData] = useState<number[]>([]);
   const [sortingIndex, setSortingIndex] = useState<number | null>(null);
-  const [algorithm, setAlgorithm] = useState("");
+  const [algorithm, setAlgorithm] = useState("bubble");
   const [algorithmInformation, setAlgorithmInformation] = useState(
     algorithmInfo[0]
   );
@@ -84,7 +84,6 @@ function App() {
           onChange={(val) => {
             setAlgorithm(val);
           }}
-          defaultValue="Choose an algorithm"
           selectedValue=""
           options={options}
         />
