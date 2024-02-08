@@ -10,7 +10,7 @@ interface AlgorithmInfoProps {
 
 const AlgorithmInfo = (props: AlgorithmInfoProps) => {
   return (
-    <div className="absolute border md:right-full md:rounded-tr-none border-gray-300 rounded-3xl lg:rounded-tl-none lg:rounded-tr-3xl flex flex-col justify-between space-y-4 lg:left-full bg-gray-200 p-4 w-max max-w-96">
+    <div className="absolute border md:right-full md:rounded-tr-none border-gray-300 rounded-3xl xl:rounded-tl-none xl:rounded-tr-3xl flex flex-col justify-between space-y-4 xl:left-full bg-gray-200 p-4 w-max max-w-xs">
       <h3 className="text-xl text-center font-bold ">{props.title}</h3>
       <p>{props.description}</p>
       <div className="flex justify-around">
