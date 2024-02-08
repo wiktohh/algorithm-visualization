@@ -9,10 +9,8 @@ const mergeSort = async (
   if (low < high) {
     const mid = Math.floor((low + high) / 2);
 
-    await Promise.all([
-      mergeSort(data, setData, setSortingIndex, speedRef, low, mid),
-      mergeSort(data, setData, setSortingIndex, speedRef, mid + 1, high),
-    ]);
+    await mergeSort(data, setData, setSortingIndex, speedRef, low, mid);
+    await mergeSort(data, setData, setSortingIndex, speedRef, mid + 1, high);
     await merge(data, setData, setSortingIndex, low, mid, high, speedRef);
   }
 };

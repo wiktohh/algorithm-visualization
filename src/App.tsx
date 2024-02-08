@@ -98,7 +98,7 @@ function App() {
           defaultValue={barCount}
         />
       </div>
-      <div className="flex justify-center items-end h-1/2 space-x-[1px]">
+      <div className="flex my-auto justify-center items-end h-1/2 space-x-[1px]">
         {data.map((item, index) => (
           <div
             key={index}

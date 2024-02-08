@@ -34,7 +34,7 @@ const InputRange = ({
           max={max}
           step={step}
           defaultValue={defaultValue}
-          className="w-full"
+          className="w-full cursor-grab"
           id="range"
           onChange={handleRangeChange}
         />
