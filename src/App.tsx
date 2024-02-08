@@ -21,8 +21,10 @@ function App() {
   const speedRef = useRef(50);
   const [barCount, setBarCount] = useState(90);
   const [showInfo, setShowInfo] = useState(false);
+  const [isSorting, setIsSorting] = useState(false);
 
   const runAlgorithm = async () => {
+    setIsSorting(true);
     switch (algorithm) {
       case SORT.BUBBLE:
         await bubbleSort(data, setData, setSortingIndex, speedRef);
@@ -42,6 +44,7 @@ function App() {
       default:
         break;
     }
+    setIsSorting(false);
   };
 
   const setAlgorithmInfo = (val: string) => {
@@ -83,19 +86,26 @@ function App() {
       <Header />
       <div className="flex flex-col space-y-4 w-3/4 mx-auto my-4 md:w-auto md:space-y-0 md:flex-row md:justify-center md:items-center md:space-x-4">
         <button
-          className="bg-blue-400 hover:bg-blue-500 px-4 py-2 rounded-md text-white font-bold text-lg"
+          className={`bg-blue-400 hover:bg-blue-500 px-4 py-2 rounded-md text-white font-bold text-lg ${
+            isSorting && "cursor-not-allowed"
+          }`}
           onClick={generateData}
+          disabled={isSorting}
         >
           Randomize Data
         </button>
         <button
-          className="bg-blue-400 hover:bg-blue-500 px-4 py-2 rounded-md text-white font-bold text-lg"
+          className={`bg-blue-400 hover:bg-blue-500 px-4 py-2 rounded-md text-white font-bold text-lg ${
+            isSorting && "cursor-not-allowed"
+          }`}
           onClick={runAlgorithm}
+          disabled={isSorting}
         >
           Run Algorithm
         </button>
         <Select
           label="Choose an algorithm"
+          isSorting={isSorting}
           onChange={(val) => {
             setAlgorithm(val);
             setAlgorithmInfo(val);
