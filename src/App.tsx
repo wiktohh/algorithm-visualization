@@ -25,26 +25,41 @@ function App() {
   const runAlgorithm = async () => {
     switch (algorithm) {
       case SORT.BUBBLE:
-        setAlgorithmInformation(algorithmInfo[0]);
         await bubbleSort(data, setData, setSortingIndex, speedRef);
         break;
       case SORT.INSERTION:
-        setAlgorithmInformation(algorithmInfo[1]);
         await insertionSort(data, setData, setSortingIndex, speedRef);
         break;
       case SORT.QUICK:
-        setAlgorithmInformation(algorithmInfo[2]);
         await quickSort(data, setData, setSortingIndex, speedRef);
         break;
       case SORT.MERGE:
-        setAlgorithmInformation(algorithmInfo[3]);
         await mergeSort(data, setData, setSortingIndex, speedRef);
         break;
       case SORT.SELECTION:
-        setAlgorithmInformation(algorithmInfo[4]);
         await selectionSort(data, setData, setSortingIndex, speedRef);
         break;
       default:
+        break;
+    }
+  };
+
+  const setAlgorithmInfo = (val: string) => {
+    switch (val) {
+      case SORT.BUBBLE:
+        setAlgorithmInformation(algorithmInfo[0]);
+        break;
+      case SORT.INSERTION:
+        setAlgorithmInformation(algorithmInfo[1]);
+        break;
+      case SORT.QUICK:
+        setAlgorithmInformation(algorithmInfo[2]);
+        break;
+      case SORT.MERGE:
+        setAlgorithmInformation(algorithmInfo[3]);
+        break;
+      case SORT.SELECTION:
+        setAlgorithmInformation(algorithmInfo[4]);
         break;
     }
   };
@@ -83,6 +98,7 @@ function App() {
           label="Choose an algorithm"
           onChange={(val) => {
             setAlgorithm(val);
+            setAlgorithmInfo(val);
           }}
           selectedValue=""
           options={options}
