@@ -4,33 +4,44 @@ import Select from "./components/Select";
 import bubbleSort from "./algorithms/bubbleSort";
 import insertionSort from "./algorithms/insertionSort";
 import quickSort from "./algorithms/quickSort";
-import { options, SORT } from "./contants";
+import { options, SORT, algorithmInfo } from "./contants";
 import mergeSort from "./algorithms/mergeSort";
 import selectionSort from "./algorithms/selectionSort";
 import InputRange from "./components/InputRange";
+import { FaInfoCircle } from "react-icons/fa";
+import AlgorithmInfo from "./components/AlgorithmInfo";
 
 function App() {
   const [data, setData] = useState<number[]>([]);
   const [sortingIndex, setSortingIndex] = useState<number | null>(null);
   const [algorithm, setAlgorithm] = useState("");
+  const [algorithmInformation, setAlgorithmInformation] = useState(
+    algorithmInfo[0]
+  );
   const speedRef = useRef(50);
   const [barCount, setBarCount] = useState(90);
+  const [showInfo, setShowInfo] = useState(false);
 
   const runAlgorithm = async () => {
     switch (algorithm) {
       case SORT.BUBBLE:
+        setAlgorithmInformation(algorithmInfo[0]);
         await bubbleSort(data, setData, setSortingIndex, speedRef);
         break;
       case SORT.INSERTION:
+        setAlgorithmInformation(algorithmInfo[1]);
         await insertionSort(data, setData, setSortingIndex, speedRef);
         break;
       case SORT.QUICK:
+        setAlgorithmInformation(algorithmInfo[2]);
         await quickSort(data, setData, setSortingIndex, speedRef);
         break;
       case SORT.MERGE:
+        setAlgorithmInformation(algorithmInfo[3]);
         await mergeSort(data, setData, setSortingIndex, speedRef);
         break;
       case SORT.SELECTION:
+        setAlgorithmInformation(algorithmInfo[4]);
         await selectionSort(data, setData, setSortingIndex, speedRef);
         break;
       default:
@@ -77,6 +88,26 @@ function App() {
           selectedValue=""
           options={options}
         />
+        <div className="relative">
+          <FaInfoCircle
+            onMouseEnter={() => setShowInfo(true)}
+            onMouseLeave={() => setShowInfo(false)}
+            className="text-4xl text-blue-400 hover:text-blue-500"
+          />
+          {showInfo && algorithmInfo && (
+            <AlgorithmInfo
+              title={algorithmInformation.name}
+              description={algorithmInformation.description}
+              stability={algorithmInformation.details.stability}
+              inPlace={algorithmInformation.details.inPlace}
+              bestCase={algorithmInformation.details.timeComplexity.bestCase}
+              averageCase={
+                algorithmInformation.details.timeComplexity.averageCase
+              }
+              worstCase={algorithmInformation.details.timeComplexity.worstCase}
+            />
+          )}
+        </div>
       </div>
       <div className="flex justify-center items-center space-x-24 my-4">
         <InputRange
