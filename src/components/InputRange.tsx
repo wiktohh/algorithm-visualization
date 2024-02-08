@@ -8,6 +8,7 @@ interface InputRangeProps {
   min: number;
   max: number;
   defaultValue: number;
+  isSorting?: boolean;
 }
 
 const InputRange = ({
@@ -18,6 +19,7 @@ const InputRange = ({
   min,
   max,
   defaultValue,
+  isSorting,
 }: InputRangeProps) => {
   const handleRangeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = parseInt(event.target.value);
@@ -29,6 +31,7 @@ const InputRange = ({
       <label htmlFor="range">{label}</label>
       <div>
         <input
+          disabled={isSorting}
           type="range"
           min={min}
           max={max}

@@ -1,3 +1,6 @@
+import { toast } from "react-toastify";
+import { isArraySorted } from "./helpers";
+
 const selectionSort = async (
   data: number[],
   setData: (data: number[]) => void,
@@ -5,6 +8,10 @@ const selectionSort = async (
   speedRef: React.MutableRefObject<number>
 ) => {
   const n = data.length;
+  if (isArraySorted(data)) {
+    toast.info("Array is already sorted");
+    return;
+  }
 
   for (let i = 0; i < n - 1; i++) {
     let minIndex = i;
@@ -22,6 +29,8 @@ const selectionSort = async (
     setSortingIndex(i);
     setData([...data]);
   }
+  setSortingIndex(null);
+  toast.success("Array has been sorted!");
 };
 
 export default selectionSort;

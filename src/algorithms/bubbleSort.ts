@@ -1,3 +1,6 @@
+import { toast } from "react-toastify";
+import { isArraySorted } from "./helpers";
+
 const bubbleSort = async (
   data: number[],
   setData: (data: number[]) => void,
@@ -6,6 +9,11 @@ const bubbleSort = async (
 ) => {
   const n = data.length;
   const updatedBars = [...data];
+
+  if (isArraySorted(updatedBars)) {
+    toast.info("Array is already sorted");
+    return;
+  }
 
   for (let i = 0; i < n - 1; i++) {
     for (let j = 0; j < n - i - 1; j++) {
@@ -21,6 +29,8 @@ const bubbleSort = async (
       }
     }
   }
+  setSortingIndex(null);
+  toast.success("Array has been sorted!");
 };
 
 export default bubbleSort;

@@ -11,6 +11,9 @@ import InputRange from "./components/InputRange";
 import { FaInfoCircle } from "react-icons/fa";
 import AlgorithmInfo from "./components/AlgorithmInfo";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function App() {
   const [data, setData] = useState<number[]>([]);
   const [sortingIndex, setSortingIndex] = useState<number | null>(null);
@@ -84,6 +87,7 @@ function App() {
   return (
     <div className="h-screen w-screen">
       <Header />
+      <ToastContainer />
       <div className="flex flex-col space-y-4 w-3/4 mx-auto my-4 md:w-auto md:space-y-0 md:flex-row md:justify-center md:items-center md:space-x-4">
         <button
           className={`bg-blue-400 hover:bg-blue-500 px-4 py-2 rounded-md text-white font-bold text-lg ${
@@ -152,6 +156,7 @@ function App() {
           min={10}
           max={170}
           defaultValue={barCount}
+          isSorting={isSorting}
         />
       </div>
       <div className="w-3/4 m-auto flex justify-center items-end h-1/2 space-x-[1px]">

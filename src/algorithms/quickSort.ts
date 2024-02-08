@@ -1,3 +1,21 @@
+import { toast } from "react-toastify";
+import { isArraySorted } from "./helpers";
+
+export const runQuickSort = async (
+  data: number[],
+  setData: (data: number[]) => void,
+  setSortingIndex: (index: number | null) => void,
+  speedRef: React.MutableRefObject<number>
+) => {
+  if (isArraySorted(data)) {
+    toast.info("Array is already sorted");
+    return;
+  }
+  await quickSort(data, setData, setSortingIndex, speedRef);
+  toast.success("Array has been sorted!");
+  setSortingIndex(null);
+};
+
 const quickSort = async (
   data: number[],
   setData: (data: number[]) => void,
@@ -15,7 +33,6 @@ const quickSort = async (
       high,
       speedRef
     );
-
     await Promise.all([
       quickSort(data, setData, setSortingIndex, speedRef, low, pi - 1),
       quickSort(data, setData, setSortingIndex, speedRef, pi + 1, high),
@@ -29,7 +46,7 @@ const partition = async (
   setSortingIndex: (index: number | null) => void,
   low: number,
   high: number,
-  speedRef: React.MutableRefObject<number>,
+  speedRef: React.MutableRefObject<number>
 ) => {
   const pivot = data[high];
   let i = low - 1;
@@ -39,16 +56,17 @@ const partition = async (
     await new Promise((resolve) => setTimeout(resolve, speed));
     if (data[j] < pivot) {
       i++;
-      setSortingIndex(j);
       [data[i], data[j]] = [data[j], data[i]];
+      setSortingIndex(j);
       setData([...data]);
     }
   }
 
   [data[i + 1], data[high]] = [data[high], data[i + 1]];
+  setSortingIndex(i + 1);
   setData([...data]);
 
   return i + 1;
 };
 
-export default quickSort;
+export default runQuickSort;

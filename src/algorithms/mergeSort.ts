@@ -1,3 +1,21 @@
+import { toast } from "react-toastify";
+import { isArraySorted } from "./helpers";
+
+export const runMergeSort = async (
+  data: number[],
+  setData: (data: number[]) => void,
+  setSortingIndex: (index: number | null) => void,
+  speedRef: React.MutableRefObject<number>
+) => {
+  if (isArraySorted(data)) {
+    toast.info("Array is already sorted");
+    return;
+  }
+  await mergeSort(data, setData, setSortingIndex, speedRef);
+  toast.success("Array has been sorted!");
+  setSortingIndex(null);
+};
+
 const mergeSort = async (
   data: number[],
   setData: (data: number[]) => void,
@@ -78,4 +96,4 @@ const merge = async (
   }
 };
 
-export default mergeSort;
+export default runMergeSort;
