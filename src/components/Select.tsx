@@ -17,7 +17,7 @@ const Select = ({ onChange, selectedValue, options }: SelectProps) => {
         onChange(e.target.value);
       }}
       id="optionSelect"
-      className="rounded-lg bg-blue-400 px-4 py-2 text-xl text-white font-bold hover:bg-blue-500 cursor-pointer"
+      className="outline-none border-none rounded-lg text-center bg-blue-400 px-4 py-2 text-xl text-white font-bold hover:bg-blue-500 cursor-pointer"
     >
       {options.map((option, index) => (
         <option

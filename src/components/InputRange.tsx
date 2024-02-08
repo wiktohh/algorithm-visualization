@@ -25,7 +25,7 @@ const InputRange = ({
   };
 
   return (
-    <div className="w-1/6">
+    <div className="w-3/4 md:w-1/6">
       <label htmlFor="range">{label}</label>
       <div>
         <input
